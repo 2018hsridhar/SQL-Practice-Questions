@@ -1,0 +1,12 @@
+-- URL := https://datalemur.com/questions/sql-histogram-tweets
+-- Histogram based Grouping operation
+-- Histogram of Tweets [Twitter SQL Interview Question]
+-- 
+SELECT TEMP.tweet_bucket, count(*) AS users_num FROM
+(
+  SELECT count(*) AS tweet_bucket, user_id AS users_num FROM tweets
+  WHERE tweet_date BETWEEN '2022-01-01' AND '2023-12-31'
+  GROUP BY user_id
+  ORDER BY tweet_bucket
+) AS TEMP
+GROUP BY TEMP.tweet_bucket
